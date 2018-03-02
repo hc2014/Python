@@ -5,7 +5,28 @@
     <title>这是show页面</title>
 </head>
 <body>
-    <table>
+
+<form action="show/" method="post">
+<input name="plan_code" type="text" />
+<input name="plan_name" type="text" />
+<input type="submit" value="新增" />
+
+</form>
+
+<form action="/editplan/" method="post">
+计划代码:<input name="plan_code" type="text" />
+计划名称;<input name="plan_name" type="text" />
+<input type="submit" value="修改" />
+</form>
+
+
+<form action="/deleteplan/" method="post">
+计划代码:<input name="plan_code" type="text" />
+<input type="submit" value="删除" />
+</form>
+
+
+    <table border="1">
         <thead>
             <th>计划名称</th>
             <th>计划代码</th>

@@ -19,6 +19,8 @@ from django.conf.urls import include
 from myblog import views
 
 urlpatterns = [
-    url(r'^index/', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^show/', views.show, name='show'),
+    url(r'^deleteplan/', views.deleteplan, name='deleteplan'),
+    url(r'^editplan/', views.editplan, name='editplan'),
 ]
