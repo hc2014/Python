@@ -142,3 +142,130 @@ python manage.py inspectdb > myblog/models.py
 ```
 
 ![](img/5.png)
+
+
+
+
+
+## 四、查询数据 绑定到models
+
+#### 1.绑定数据到models
+
+
+
+在views.py 中新增一个方法getPlan，然后 index 方法调用getPlan
+
+```
+def index(request):
+    getPlan()
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+
+def getPlan():
+    from myblog import models
+    planList=models.TldTplanInfo.objects.all()--取出所有数据
+    for obj in planList:
+        print(obj.plan_code)
+```
+
+
+
+启动服务,浏览器输入地址后：命令窗口就会打印出plan_code
+
+![](img/6.png)
+
+
+
+其他一些常用的取数方式：
+
+```
+models.UserInfo.objects.all().values('plan_code')    --plan_code
+
+models.UserInfo.objects.all().values_list('plan_code','plan_name')  --获取plan_code，plan_name并且生成一个列表
+
+models.UserInfo.objects.get(plan_code=JSCFJH)--获取plan_code=JSCFJH 的数据
+
+```
+
+
+
+#### 2.显示数据到views
+
+view.py 添加一个方法show
+
+```
+def show(request):
+    from myblog import models
+    plan_list=models.TldTplanInfo.objects.all()
+    return render(request,"show.html",{'plan_list':plan_list})
+```
+
+新增一个show.html页面
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>这是show页面</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>计划名称</th>
+            <th>计划代码</th>
+        </thead>
+        <tbody>
+            {% for plan in plan_list%}
+                <tr>
+                    <td>{{plan.plan_name}}</td>
+                    <td>{{plan.plan_code}}</td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</body>
+</html>
+```
+
+
+
+配置show.html页面的路由
+
+```
+--urls.py
+urlpatterns = [
+    url(r'^index/', views.index, name='index'),
+    url(r'^show/', views.show, name='show'),
+]
+```
+
+```
+--settting.py
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+                os.path.join(BASE_DIR,'myblog')--手动高亮
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+
+
+然后启动服务，浏览器输入:http://localhost:1008/show/
+
+![](img/7.png)
+
+
+
