@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>这是show页面</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>计划名称</th>
+            <th>计划代码</th>
+        </thead>
+        <tbody>
+            {% for plan in plan_list%}
+                <tr>
+                    <td>{{plan.plan_name}}</td>
+                    <td>{{plan.plan_code}}</td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</body>
+</html>
