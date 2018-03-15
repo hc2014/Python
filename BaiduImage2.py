@@ -29,6 +29,7 @@ class BaiduImage(object):
     def request(self):
         for i in range(1, 11):
             try:
+                    #百度图片 滚动加载的地址,pn表示当前加载到多少条数据,rn表示当前页面多少条数据
                     request_url='http://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&ct=201326592&is=&fp=result&queryWord=%E6%B5%B7%E8%B4%BC%E7%8E%8B%E5%9B%BE%E7%89%87&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=&z=&ic=&word=%E6%B5%B7%E8%B4%BC%E7%8E%8B%E5%9B%BE%E7%89%87&s=&se=&tab=&width=&height=&face=&istype=&qc=&nc=&fr=&pn='+str(self.page)+'&rn=30&gsm=1e&1519803762360'
 
                     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36','Content':'test/json','refresh':'http://image.baidu.com'}
